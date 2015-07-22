@@ -28,7 +28,14 @@ class CupsPPDs:
         for val in models:
             print val
 
+    def show_network_available(self):
+        dev = self.cups_conn.getDevices()
+        for uri, info in dev.iteritems():
+            if uri.find("://") > 0:
+                print "uri: {0} , info: {1}".format(uri, info['device-info'])
+
 if __name__ == '__main__':
     cups_ppds = CupsPPDs()
     cups_ppds.dump_makes()
     cups_ppds.dump_models('HP')
+    cups_ppds.show_network_available()
